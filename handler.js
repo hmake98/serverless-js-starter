@@ -6,17 +6,18 @@ const { PrismaClient } = require('@prisma/client')
 const prisma = new PrismaClient();
 const app = express();
 
+// users
+app.post("/user/create", createUser);
+app.get("/user/list", listUsers);
+app.put("/user/update", updateUser);
+app.delete("/user/:id", deleteUser);
+
+
 app.get("/", (req, res, next) => {
   res.status(200).json({
     name: 'Welcome to serverless!'
   })
 })
-
-// users
-app.post("/user/create", createUser);
-app.get("/user/list", listUsers);
-app.put("/user/update", updateUser);
-app.delete("/user/:id", deleteUser)
 
 app.use((req, res, next) => {
   return res.status(404).json({
