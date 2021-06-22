@@ -7,7 +7,8 @@
     "deploy": "sls deploy",
     "db:save": "npx prisma migrate dev --create-only --preview-feature",
     "db:migrate": "npx prisma migrate dev --preview-feature",
-    "db:migrate:prod": "npx prisma migrate deploy --preview-feature"
+    "db:migrate:prod": "npx prisma migrate deploy --preview-feature",
+    "lint": "eslint --ext .js,.ts ."
   },
   "dependencies": {
     "@prisma/client": "^2.25.0",
@@ -21,5 +22,15 @@
     "serverless": "^2.28.7",
     "serverless-dotenv-plugin": "^3.8.1",
     "serverless-offline": "^6.8.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix",
+      "eslint"
+    ],
+    "*.json": [
+      "prettier --write"
+    ]
   }
 }
