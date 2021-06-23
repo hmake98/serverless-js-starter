@@ -1,5 +1,5 @@
-const { prisma } = require("../utils/constants");
-const { createUser, admin, generateHash, compareHash } = require("../helpers/authService");
+const { prisma, compareHash, generateHash } = require("../utils/helpers");
+const { createUser, createToken } = require("../helpers/authService");
 const sendResponse = require("../utils/response");
 
 const login = async (req, res, next) => {
@@ -14,7 +14,7 @@ const login = async (req, res, next) => {
         if (!compareHash(password, user.password)) {
             next({ message: 'Password not valid!' });
         }
-        const token = await admin.auth().createCustomToken(user.uid);
+        const token = await createToken(user.uid);
         sendResponse(res, {
             statusCode: 200,
             message: 'Success',
@@ -41,7 +41,7 @@ const signup = async (req, res, next) => {
         const hash = generateHash(password);
         const user = await prisma.user.create({ data: { name, email, password: hash, uid: firebase_user.uid } });
         delete user.password;
-        const token = await admin.auth().createCustomToken(firebase_user.uid)
+        const token = await createToken(firebase_user.uid);
         sendResponse(res, {
             statusCode: 200,
             message: 'Created',

@@ -1,4 +1,4 @@
-const { prisma } = require('../utils/constants');
+const { prisma } = require('../utils/helpers');
 const sendResponse = require('../utils/response');
 
 const listUsers = async (req, res, next) => {

@@ -41,7 +41,7 @@ app.get("/post/:id", [validRequest, authRequest], listPost);
 app.put("/post", [validRequest, authRequest], updatePost);
 app.delete("/post/:id", [validRequest, authRequest], deletePost);
 
-app.get("/api", (req, res, next) => {
+app.get("/api", (req, res) => {
   return res.status(200).json({
     name: 'Welcome to serverless!'
   })
