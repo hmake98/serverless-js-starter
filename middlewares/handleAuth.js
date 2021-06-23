@@ -1,6 +1,6 @@
 const { validationResult } = require('express-validator');
 const { verify } = require('../helpers/authService');
-const { prisma } = require('../utils/constants');
+const { prisma } = require('../utils/helpers');
 const { AUTH_ERROR, INVALID_TOKEN, USER_NOT_FOUND } = require('../utils/messages');
 
 const validRequest = (req, res, next) => {
